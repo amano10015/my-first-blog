@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Мой крутой блог</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Заголовок (не знаю что написать)</a></h1>
-        </div>
+{% extends 'blog/base.html' %}
 
-        <div>
-            <p>Опубликовано: 05.12.2021, 12:14</p>
-            <h2><a href="">Первое сообщение</a></h2>
-            <p>Привет Лера, как у тебя делишки</p>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+           <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-
-        <div>
-            <p>Опубликовано: 05.12.2021, 12:14</p>
-            <h2><a href="">Второе сообщение</a></h2>
-            <p>Свиданка в четверг получается?)</p>
-        </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
